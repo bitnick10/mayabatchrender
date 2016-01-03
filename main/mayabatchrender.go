@@ -8,6 +8,7 @@ import (
 	"time"
 	"os"
 //"io/ioutil"
+	"strconv"
 )
 
 
@@ -20,10 +21,24 @@ import (
 //convert "E:\My\Desktop\Pal2\art\maya\Songzhou Outskirts\images\Outskirts.png" -gamma 2.2 "E:\My\Desktop\Pal2\art\maya\Songzhou Outskirts\images\Outskirtsgammad.png"
 
 //"C:\Program Files\Autodesk\Maya2016\bin\Render.exe" -r mr -proj "E:\My\Desktop\Pal2\art\maya\Songzhou Outskirts" -cam "light_AD:camera45gate" -of "png" "E:\My\Desktop\Pal2\art\maya\Songzhou Outskirts\scenes\Outskirts.mb"
+type RenderSettings struct {
+	ProjectPath string
+	SceneName   string
+	CameraName  string
+	ImageName   string
+	PercentResolution int // 50 means 50%
+}
 
 func main() {
-	imageName := RenderCommand()
-	ConvertCommand(imageName)
+	rs := RenderSettings{}
+	rs.ProjectPath = "E:\\My\\Desktop\\Pal2\\art\\maya\\Songzhou Outskirts"
+	rs.SceneName = "Outskirts"
+	rs.CameraName = "light_AD:camera45gate"
+	rs.ImageName = rs.SceneName + " " + time.Now().Format("2006-01-02 150405")
+	rs.PercentResolution = 100
+
+	RenderCommand(rs)
+	ConvertCommand(rs.ImageName)
 	var enterToExit string
 	fmt.Println("press Enter to exit")
 	fmt.Scanf(enterToExit)
@@ -46,29 +61,35 @@ func ConvertCommand(imageName string) {
 	dir, _ := os.Getwd()
 	idir := dir + "/images"
 	imageFullName := idir + "/" + imageName + ".png"
-	cmd := exec.Command("convert", imageFullName, "-gamma", "2.2", imageFullName);
+	cmd := exec.Command("convert",
+		imageFullName,
+		"-gamma", "2.2",
+		imageFullName);
 	CommandRun(cmd)
 }
-func RenderCommand() string {
+
+func RenderCommand(rs RenderSettings) {
 	dir, _ := os.Getwd()
 	render := "C:/Program Files/Autodesk/Maya2016/bin/Render.exe"
-	projPath := "E:\\My\\Desktop\\Pal2\\art\\maya\\Songzhou Outskirts"
-	sceneName := "Outskirts"
-	imageName := sceneName + " " + time.Now().Format("2006-01-02 150405")
+	//imageName := rs.SceneName + " " + time.Now().Format("2006-01-02 150405")
 
 	cmd := exec.Command(render,
 		"-r", "mr",
 		"-rd", dir + "/images",
-		"-im", imageName,
+		"-im", rs.ImageName,
 		"-of", "png",
-		"-proj", projPath,
-		"-cam", "light_AD:camera45gate",
-		projPath + "/scenes/" + sceneName + ".mb")
+		"-percentRes",strconv.Itoa(rs.PercentResolution),
+		"-proj", rs.ProjectPath,
+		"-cam", rs.CameraName,
+		rs.ProjectPath + "/scenes/" + rs.SceneName + ".mb")
 
 	//cmd := exec.Command("D:\\projects\\tickers.exe")
-
+	startTime := time.Now()
 	CommandRun(cmd)
-	return imageName
+	endTime := time.Now()
+	dur := endTime.Sub(startTime)
+	fmt.Print(dur.Minutes())
+	fmt.Println(" minitues")
 	//if err != nil {
 	//	fmt.Println(err)
 	//}
