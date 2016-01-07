@@ -39,7 +39,7 @@ func main() {
 	fmt.Printf("%+v\n", rs)
 
 	RenderCommand(rs)
-	ConvertCommand(rs.ImageName)
+	ImageMagickGamma(rs.ImageName,2.2)
 	ConvertCommand2(rs.ImageName)
 
 	var enterToExit string
@@ -47,15 +47,14 @@ func main() {
 	fmt.Scanf(enterToExit)
 }
 
-// gamma 2.2
-func ConvertCommand(imageName string) {
+func ImageMagickGamma(imageName string,gamma float32) {
 	program := "ImageMagick-6.9.3-0-portable-Q16-x64/convert.exe"
 	dir, _ := os.Getwd()
 	idir := dir + "/images"
 	imageFullName := idir + "/" + imageName + ".png"
 	cmd := exec.Command(program,
 		imageFullName,
-		"-gamma", "2.2",
+		"-gamma", gamma,
 		imageFullName)
 	CommandRun(cmd)
 }
