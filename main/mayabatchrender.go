@@ -38,16 +38,16 @@ func main() {
 	rs.ImageName = rs.SceneName + " " + time.Now().Format("2006-01-02 150405")
 	fmt.Printf("%+v\n", rs)
 
-	RenderCommand(rs)
-	ImageMagickGamma(rs.ImageName,2.2)
-	ConvertCommand2(rs.ImageName)
+	MayaRedner(rs)
+	ImageMagickGamma(rs.ImageName, "2.2")
+	ImageMagickPNG2JPG(rs.ImageName)
 
 	var enterToExit string
 	fmt.Println("press Enter to exit")
-	fmt.Scanf(enterToExit)
+	fmt.Scanf("%s",enterToExit)
 }
 
-func ImageMagickGamma(imageName string,gamma float32) {
+func ImageMagickGamma(imageName, gamma string) {
 	program := "ImageMagick-6.9.3-0-portable-Q16-x64/convert.exe"
 	dir, _ := os.Getwd()
 	idir := dir + "/images"
@@ -59,8 +59,7 @@ func ImageMagickGamma(imageName string,gamma float32) {
 	CommandRun(cmd)
 }
 
-// png to jpg
-func ConvertCommand2(imageName string) {
+func ImageMagickPNG2JPG(imageName string) {
 	program := "ImageMagick-6.9.3-0-portable-Q16-x64/convert.exe"
 	dir, _ := os.Getwd()
 	idir := dir + "/images"
@@ -72,7 +71,7 @@ func ConvertCommand2(imageName string) {
 	CommandRun(cmd)
 }
 
-func RenderCommand(rs RenderSettings) {
+func MayaRedner(rs RenderSettings) {
 	dir, _ := os.Getwd()
 	program := "C:/Program Files/Autodesk/Maya2016/bin/Render.exe"
 
@@ -83,6 +82,7 @@ func RenderCommand(rs RenderSettings) {
 		"-of", "png",
 		"-percentRes", strconv.Itoa(rs.PercentResolution),
 		"-proj", rs.ProjectPath,
+		"-v", "5",
 		"-cam", rs.CameraName,
 		rs.ProjectPath + "/scenes/" + rs.SceneName + ".mb")
 
