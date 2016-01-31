@@ -23,10 +23,10 @@ namespace MayaBatchRender
         public string ImageName { get; set; }
         public int PercentResolution { get; set; } // 50 means 50%
     }
-    class BatchRender
+    class Renderer
     {
         public Process RenderProcess { get; set; }
-        public BatchRender(RenderSettings rs)
+        public Renderer(RenderSettings rs)
         {
             RenderProcess = new Process();
             RenderProcess.StartInfo.UseShellExecute = false;
