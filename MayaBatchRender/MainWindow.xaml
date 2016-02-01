@@ -1,0 +1,23 @@
+﻿<Window x:Class="MayaBatchRender.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MayaBatchRender"
+        mc:Ignorable="d"
+        Title="Maya Batch Render" Height="900" Width="1000" Loaded="Window_Loaded" Closing="Window_Closing" Background="#FF272727">
+    <Grid>
+        <ScrollViewer HorizontalAlignment="Left" Height="869" VerticalAlignment="Top" Width="982">
+            <StackPanel>
+                <Grid Margin="0,10,0,0">
+                    <CheckBox x:Name="checkBoxIsShutdown" Content="渲染结束后关机" Margin="10,10,0,10" HorizontalAlignment="Left" VerticalAlignment="Top" Background="White" Foreground="#FFEAEAEA"/>
+                    <Button x:Name="buttonBeginRender" Content="开始渲染" Width="75" Height="25" Margin="128,4,761,0" VerticalAlignment="Top" Click="buttonBeginRender_Click" />
+                </Grid>
+                <TextBox x:Name="textBoxConfig" AcceptsReturn="True" HorizontalAlignment="Left" Height="399" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="944" Background="#FF252525" Foreground="#FFEAEAEA" VerticalScrollBarVisibility="Auto" BorderBrush="#FFABADB3" TextChanged="textBoxConfig_TextChanged"/>
+                <TextBox x:Name="textBoxInfo" HorizontalAlignment="Left" Height="399" Margin="10,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="944" Background="#FF252525" Foreground="#FFEAEAEA" VerticalScrollBarVisibility="Auto" BorderBrush="#FFABADB3"/>
+            </StackPanel>
+        </ScrollViewer>
+
+
+    </Grid>
+</Window>

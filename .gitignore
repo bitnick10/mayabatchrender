@@ -5,7 +5,12 @@
 
 .idea/
 images/
+bin/
+Debug/
+Release/
+.vs/
 ImageMagick-6.9.3-0-portable-Q16-x64/
+YamlDotNet-3.8.0/
 
 # Folders
 _obj
