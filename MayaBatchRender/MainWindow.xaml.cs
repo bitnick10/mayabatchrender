@@ -110,5 +110,10 @@ namespace MayaBatchRender
         {
             System.IO.File.WriteAllText("config.yaml", textBoxConfig.Text);
         }
+
+        private void buttonOpenFolder_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(Directory.GetCurrentDirectory());
+        }
     }
 }
