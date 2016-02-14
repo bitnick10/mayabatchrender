@@ -16,6 +16,7 @@ namespace MayaBatchRender
 {
     class RenderSettings
     {
+        public int VerbosityLevel { get; set; }
         public string ProjectPath { get; set; }
         public string SceneFolder { get; set; }
         public string SceneName { get; set; }
@@ -35,7 +36,7 @@ namespace MayaBatchRender
             RenderProcess.StartInfo.FileName = @"C:/Program Files/Autodesk/Maya2016/bin/Render.exe";
             RenderProcess.StartInfo.Arguments += string.Format("-r mr ");
             RenderProcess.StartInfo.Arguments += string.Format("-of png ");
-            RenderProcess.StartInfo.Arguments += string.Format("-v 5 ");
+            RenderProcess.StartInfo.Arguments += string.Format("-v {0} ", rs.VerbosityLevel);
             RenderProcess.StartInfo.Arguments += string.Format(@"-proj ""{0}"" ", rs.ProjectPath);
             RenderProcess.StartInfo.Arguments += string.Format(@"-im ""{0}"" ", rs.ImageName);
             RenderProcess.StartInfo.Arguments += string.Format(@"-rd ""{0}"" ", Directory.GetCurrentDirectory() + "/images");

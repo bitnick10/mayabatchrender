@@ -102,6 +102,8 @@ namespace MayaBatchRender
 
         private void buttonBeginRender_Click(object sender, RoutedEventArgs e)
         {
+            textBoxInfo.Clear();
+
             thread = new Thread(new ThreadStart(Td));
             thread.Start();
         }
@@ -114,6 +116,12 @@ namespace MayaBatchRender
         private void buttonOpenFolder_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(Directory.GetCurrentDirectory());
+        }
+
+        private void buttonInterruptRender_Click(object sender, RoutedEventArgs e)
+        {
+            if (thread != null)
+                thread.Abort();
         }
     }
 }
