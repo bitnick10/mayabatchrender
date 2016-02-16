@@ -14,6 +14,7 @@
                     <Button x:Name="buttonBeginRender" Content="开始渲染" Width="75" Height="25" Margin="128,4,761,0" VerticalAlignment="Top" Click="buttonBeginRender_Click" />
                     <Button x:Name="buttonInterruptRender" Content="中断渲染" Width="75" Height="25" Margin="208,4,681,0" VerticalAlignment="Top" Click="buttonInterruptRender_Click" />
                     <Button x:Name="buttonOpenFolder" Content="打开文件夹" Width="75" Height="25" Margin="518,4,373,0" VerticalAlignment="Top" Click="buttonOpenFolder_Click" />
+                    <Button x:Name="buttonOpenProjectFolder" Content="项目文件夹" Height="25" Margin="598,4,292,0" VerticalAlignment="Top" Click="buttonOpenProjectFolder_Click" />
                 </Grid>
                 <TextBox x:Name="textBoxConfig" AcceptsReturn="True" HorizontalAlignment="Left" Height="399" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="944" Background="#FF252525" Foreground="#FFEAEAEA" VerticalScrollBarVisibility="Auto" BorderBrush="#FFABADB3" TextChanged="textBoxConfig_TextChanged"/>
                 <TextBox x:Name="textBoxInfo" HorizontalAlignment="Left" Height="399" Margin="10,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="944" Background="#FF252525" Foreground="#FFEAEAEA" VerticalScrollBarVisibility="Auto" BorderBrush="#FFABADB3"/>

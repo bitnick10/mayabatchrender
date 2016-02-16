@@ -26,6 +26,7 @@ namespace MayaBatchRender
     {
         public delegate void UpdateTextCallback(string message);
         Thread thread;
+        RenderSettings rs;
         public MainWindow()
         {
             InitializeComponent();
@@ -38,7 +39,7 @@ namespace MayaBatchRender
             string yaml = System.IO.File.ReadAllText("config.yaml");
             var deserializer = new Deserializer();
             var input = new StringReader(yaml);
-            RenderSettings readyaml = deserializer.Deserialize<RenderSettings>(input);
+            rs = deserializer.Deserialize<RenderSettings>(input);
         }
         private void UpdateText(string message)
         {
@@ -57,7 +58,7 @@ namespace MayaBatchRender
             string yaml = System.IO.File.ReadAllText("config.yaml");
             var deserializer = new Deserializer();
             var input = new StringReader(yaml);
-            RenderSettings rs = deserializer.Deserialize<RenderSettings>(input);
+            rs = deserializer.Deserialize<RenderSettings>(input);
 
             rs.ImageName = string.Format("{0} {1}", rs.SceneName, DateTime.Now.ToString("yyyy-MM-dd HHmmss"));
             Renderer renderer = new Renderer(rs);
@@ -122,6 +123,11 @@ namespace MayaBatchRender
         {
             if (thread != null)
                 thread.Abort();
+        }
+
+        private void buttonOpenProjectFolder_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(rs.ProjectPath);
         }
     }
 }
